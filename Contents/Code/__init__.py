@@ -141,7 +141,7 @@ def Server(title, svlink, svthumb, inum):
     return oc
 
 @route('/video/vkool/createMediaObject')
-def createMediaObject(url, title,thumb,rating_key,include_container=False):
+def createMediaObject(url, title,thumb,rating_key,include_container=False,includeRelatedCount=None,includeRelated=None,includeExtras=None):
     container = Container.MP4
     video_codec = VideoCodec.H264
     audio_codec = AudioCodec.AAC
@@ -183,6 +183,9 @@ def PlayVideo(url):
     url = videolinks(url)
     if str(url).find('youtube')!=-1:
         oc = ObjectContainer(title2='Youtube Video')
+        # idregex = r'https?://www.youtube.com/(?:embed/|watch\?v=)'+r'(.+?(?=\?)|.+)'
+        # VideoUrl = re.compile(idregex).findall(url)[0]
+        # url='https://www.youtube.com/watch?v='+VideoUrl
         oc.add(VideoClipObject(
             url=url,
             title='Youtube video',
